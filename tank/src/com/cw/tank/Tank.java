@@ -74,6 +74,6 @@ public class Tank {
      * 不灵活，返回类型固定了，如果后续要求返回多颗子弹、不同类型子弹则需要修改
      */
     public void fire() {
-        tankFrame.b = new Bullet(this.x, this.y, this.dir);
+        tankFrame.bulletList.add(new Bullet(this.x, this.y, this.dir, this.tankFrame));
     }
 }

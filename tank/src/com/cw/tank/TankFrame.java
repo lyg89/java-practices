@@ -5,6 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author cassie on 2021/5/22.
@@ -12,8 +14,9 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    Bullet b = new Bullet(300, 300, Dir.DOWN);
-    private static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    List<Bullet> bulletList = new ArrayList<>();
+
+    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -36,11 +39,12 @@ public class TankFrame extends Frame {
 
     /**
      * 处理双缓冲，解决闪烁问题，update方法于repaint调用中paint方法之前被调用
+     *
      * @param g 系统画笔
      */
     @Override
     public void update(Graphics g) {
-        if(offScreenImage == null) {
+        if (offScreenImage == null) {
             offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
@@ -54,8 +58,15 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量：" + bulletList.size(), 10, 60);
+        g.setColor(c);
+
         myTank.paint(g);
-        b.paint(g);
+        for (int i = 0; i < bulletList.size(); i++) {
+            bulletList.get(i).paint(g);
+        }
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -104,7 +115,7 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_DOWN:
                     bD = false;
                     break;
-                case KeyEvent.VK_CONTROL:
+                case KeyEvent.VK_SHIFT:
                     myTank.fire();
                     break;
                 default:

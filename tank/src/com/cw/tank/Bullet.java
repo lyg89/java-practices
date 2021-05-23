@@ -10,7 +10,9 @@ public class Bullet {
     private static final int SPEED = 10;
     private int x, y;
     private Dir dir;
-    private static final int WIDTH = 50, HEIGHT = 50;
+    static final int WIDTH = ResourceMgr.bulletL.getWidth();
+    static final int HEIGHT = ResourceMgr.bulletL.getHeight();
+
     private boolean living = true;
     private TankFrame tf;
 

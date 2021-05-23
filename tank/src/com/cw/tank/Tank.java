@@ -17,6 +17,9 @@ public class Tank {
 
     private TankFrame tankFrame;
 
+    static final int WIDTH = ResourceMgr.tankL.getWidth();
+    static final int HEIGHT = ResourceMgr.tankL.getHeight();
+
     public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
@@ -86,6 +89,8 @@ public class Tank {
      * 不灵活，返回类型固定了，如果后续要求返回多颗子弹、不同类型子弹则需要修改
      */
     public void fire() {
-        tankFrame.bulletList.add(new Bullet(this.x, this.y, this.dir, this.tankFrame));
+        int bX = x + WIDTH / 2 - Bullet.WIDTH / 2;
+        int bY = y + HEIGHT / 2 - Bullet.HEIGHT / 2;
+        tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, this.tankFrame));
     }
 }

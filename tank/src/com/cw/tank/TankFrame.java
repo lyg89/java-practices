@@ -13,10 +13,12 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+    Tank myTank = new Tank(200, 400, Dir.DOWN, this);
     List<Bullet> bulletList = new ArrayList<>();
 
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+
+    List<Tank> tanks = new ArrayList<>();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -66,6 +68,11 @@ public class TankFrame extends Frame {
         myTank.paint(g);
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
+        }
+
+        // 绘出敌方坦克
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
         }
     }
 
@@ -137,11 +144,5 @@ public class TankFrame extends Frame {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        TankFrame tankFrame = new TankFrame();
-        while (true) {
-            Thread.sleep(50);
-            tankFrame.repaint();
-        }
-    }
+
 }

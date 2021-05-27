@@ -27,12 +27,19 @@ public class Tank {
 
     private Random random = new Random();
 
+    Rectangle rect = new Rectangle();
+
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tankFrame = tankFrame;
         this.group = group;
+
+        rect.x = x;
+        rect.y = y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public int getX() {
@@ -133,6 +140,9 @@ public class Tank {
             randomDir();
 
         boundsCheck();
+
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     private void boundsCheck() {

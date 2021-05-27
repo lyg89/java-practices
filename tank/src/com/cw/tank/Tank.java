@@ -22,8 +22,8 @@ public class Tank {
 
     private boolean living = true;
 
-    static final int WIDTH = ResourceMgr.tankU.getWidth();
-    static final int HEIGHT = ResourceMgr.tankU.getHeight();
+    static final int WIDTH = ResourceMgr.goodTankU.getWidth();
+    static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
     private Random random = new Random();
 
@@ -89,16 +89,16 @@ public class Tank {
         }
         switch (dir) {
             case LEFT:
-                g.drawImage(ResourceMgr.tankL, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankL : ResourceMgr.goodTankL, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.tankU, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankU : ResourceMgr.goodTankU, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankR : ResourceMgr.goodTankR, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankD : ResourceMgr.goodTankD, x, y, null);
                 break;
             default:
                 break;

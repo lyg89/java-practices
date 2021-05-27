@@ -15,12 +15,10 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
     List<Bullet> bulletList = new ArrayList<>();
-
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-
     List<Tank> tanks = new ArrayList<>();
-
     Explode e = new Explode(100, 100, this);
+
+    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);

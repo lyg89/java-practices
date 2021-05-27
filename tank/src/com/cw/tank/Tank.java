@@ -12,7 +12,7 @@ public class Tank {
 
     private Dir dir;
 
-    private static final int SPEED = 1;
+    private static final int SPEED = 2;
 
     private boolean moving = true;
 
@@ -22,8 +22,8 @@ public class Tank {
 
     private boolean living = true;
 
-    static final int WIDTH = ResourceMgr.tankL.getWidth();
-    static final int HEIGHT = ResourceMgr.tankL.getHeight();
+    static final int WIDTH = ResourceMgr.tankU.getWidth();
+    static final int HEIGHT = ResourceMgr.tankU.getHeight();
 
     private Random random = new Random();
 
@@ -137,6 +137,8 @@ public class Tank {
         int bX = x + WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = y + HEIGHT / 2 - Bullet.HEIGHT / 2;
         tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, this.group, this.tankFrame));
+
+        if(this.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
     }
 
     public void die() {

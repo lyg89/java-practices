@@ -8,17 +8,17 @@ import java.util.Random;
  */
 public class Tank {
 
-    private int x, y;
+    int x, y;
 
-    private Dir dir;
+    Dir dir;
 
     private static final int SPEED = 2;
 
     private boolean moving = true;
 
-    private Group group;
+    Group group;
 
-    private TankFrame tankFrame;
+    TankFrame tankFrame;
 
     private boolean living = true;
 
@@ -134,7 +134,7 @@ public class Tank {
         }
 
         if (this.group == Group.BAD && random.nextInt(100) > 95) {
-            this.fire();
+            this.fire(DefaultFireStrategy.getInstance());
         }
         if (this.group == Group.BAD && random.nextInt(100) > 95)
             randomDir();
@@ -153,10 +153,10 @@ public class Tank {
             y = 28;
         }
         if (x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) {
-            x = TankFrame.GAME_WIDTH -Tank.WIDTH - 2;
+            x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
         }
         if (y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) {
-            y = TankFrame.GAME_HEIGHT -Tank.HEIGHT - 2;
+            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
         }
     }
 
@@ -168,12 +168,8 @@ public class Tank {
      * 这里为什么不直接返回bullet？
      * 不灵活，返回类型固定了，如果后续要求返回多颗子弹、不同类型子弹则需要修改
      */
-    public void fire() {
-        int bX = x + WIDTH / 2 - Bullet.WIDTH / 2;
-        int bY = y + HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, this.group, this.tankFrame));
-
-        // if(this.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+    public void fire(FireStrategy fireStrategy) {
+        fireStrategy.fire(this);
     }
 
     public void die() {

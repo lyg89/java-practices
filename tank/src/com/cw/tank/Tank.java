@@ -1,12 +1,14 @@
 package com.cw.tank;
 
+import com.cw.tank.abstractfactory.BaseTank;
+
 import java.awt.*;
 import java.util.Random;
 
 /**
  * @author cassie on 2021/5/22.
  */
-public class Tank {
+public class Tank extends BaseTank {
 
     int x, y;
 
@@ -90,6 +92,7 @@ public class Tank {
         this.moving = moving;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             tankFrame.tanks.remove(this);

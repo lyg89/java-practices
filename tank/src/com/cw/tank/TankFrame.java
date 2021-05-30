@@ -1,5 +1,9 @@
 package com.cw.tank;
 
+import com.cw.tank.abstractfactory.BaseExplode;
+import com.cw.tank.abstractfactory.DefaultFactory;
+import com.cw.tank.abstractfactory.GameFactory;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -16,7 +20,9 @@ public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
     List<Bullet> bulletList = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+    public List<BaseExplode> explodes = new ArrayList<>();
+
+    GameFactory gf = new DefaultFactory();
 
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 860;
 

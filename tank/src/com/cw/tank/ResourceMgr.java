@@ -12,7 +12,7 @@ public class ResourceMgr {
     static BufferedImage goodTankU, goodTankL, goodTankR, goodTankD;
     static BufferedImage badTankU, badTankL, badTankR, badTankD;
     static BufferedImage bulletL, bulletU, bulletR, bulletD;
-    static BufferedImage[] explodes = new BufferedImage[16];
+    public static BufferedImage[] explodes = new BufferedImage[16];
 
     static {
         try {

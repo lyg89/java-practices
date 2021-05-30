@@ -1,11 +1,14 @@
 package com.cw.tank;
 
+
+import com.cw.tank.abstractfactory.BaseBullet;
+
 import java.awt.*;
 
 /**
  * @author cassie on 2021/5/22.
  */
-public class Bullet {
+public class Bullet extends BaseBullet {
 
     private static final int SPEED = 10;
     private int x, y;
@@ -35,6 +38,7 @@ public class Bullet {
         tf.bulletList.add(this);
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             tf.bulletList.remove(this);
@@ -98,7 +102,7 @@ public class Bullet {
             this.die();
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            tf.explodes.add(new Explode(eX, eY, tf));
+            tf.explodes.add(tf.gf.createExplode(eX, eY, tf));
         }
     }
 

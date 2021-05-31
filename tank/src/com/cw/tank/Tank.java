@@ -18,7 +18,7 @@ public class Tank {
 
     Group group;
 
-    TankFrame tankFrame;
+    GameModel gm;
 
     private boolean living = true;
 
@@ -29,11 +29,11 @@ public class Tank {
 
     Rectangle rect = new Rectangle();
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -92,7 +92,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!living) {
-            tankFrame.tanks.remove(this);
+            gm.tanks.remove(this);
         }
         switch (dir) {
             case LEFT:

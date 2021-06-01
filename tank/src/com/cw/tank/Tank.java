@@ -1,33 +1,36 @@
 package com.cw.tank;
 
+import com.cw.tank.strategy.DefaultFireStrategy;
+import com.cw.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
 /**
  * @author cassie on 2021/5/22.
  */
-public class Tank {
+public class Tank extends GameObject {
 
-    int x, y;
+    public int x, y;
 
-    Dir dir;
+    public Dir dir;
 
     private static final int SPEED = 2;
 
     private boolean moving = true;
 
-    Group group;
+    public Group group;
 
-    GameModel gm;
+    public GameModel gm;
 
     private boolean living = true;
 
-    static final int WIDTH = ResourceMgr.goodTankU.getWidth();
-    static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
+    public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
+    public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
     private Random random = new Random();
 
-    Rectangle rect = new Rectangle();
+    private Rectangle rect = new Rectangle();
 
     public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
@@ -90,9 +93,10 @@ public class Tank {
         this.moving = moving;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.tanks.remove(this);
+            gm.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -174,5 +178,13 @@ public class Tank {
 
     public void die() {
         this.living = false;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public void stop() {
+        this.moving = false;
     }
 }

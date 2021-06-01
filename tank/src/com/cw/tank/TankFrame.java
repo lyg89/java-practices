@@ -1,5 +1,7 @@
 package com.cw.tank;
 
+import com.cw.tank.strategy.FourDirFireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

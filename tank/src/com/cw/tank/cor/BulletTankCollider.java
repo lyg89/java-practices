@@ -1,6 +1,7 @@
 package com.cw.tank.cor;
 
 import com.cw.tank.Bullet;
+import com.cw.tank.Explode;
 import com.cw.tank.GameObject;
 import com.cw.tank.Tank;
 
@@ -14,9 +15,17 @@ public class BulletTankCollider implements Collider {
         if (o1 instanceof Bullet && o2 instanceof Tank) {
             Bullet bullet = (Bullet) o1;
             Tank tank = (Tank) o2;
-            // TODO: 2021/6/1 Copy code from method collideWith
-            if (bullet.collideWith(tank)) {
-                // 坦克与子弹相撞后不进行后续collider的处理
+
+            if (bullet.getGroup() == tank.getGroup()) {
+                return true;
+            }
+
+            if (bullet.getRect().intersects(tank.getRect())) {
+                tank.die();
+                bullet.die();
+                int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+                int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+                new Explode(eX, eY);
                 return false;
             }
         } else if (o1 instanceof Tank && o2 instanceof Bullet) {

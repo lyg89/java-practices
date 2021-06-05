@@ -12,6 +12,7 @@ import java.util.Random;
 public class Tank extends GameObject {
 
     public int x, y;
+    public int oldX, oldY;
 
     public Dir dir;
 
@@ -20,8 +21,6 @@ public class Tank extends GameObject {
     private boolean moving = true;
 
     public Group group;
-
-    public GameModel gm;
 
     private boolean living = true;
 
@@ -32,17 +31,20 @@ public class Tank extends GameObject {
 
     private Rectangle rect = new Rectangle();
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
 
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        if (group == Group.BAD) {
+            GameModel.getInstance().add(this);
+        }
     }
 
     public int getX() {
@@ -96,7 +98,7 @@ public class Tank extends GameObject {
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -118,7 +120,15 @@ public class Tank extends GameObject {
         move();
     }
 
+    public void back() {
+        x = oldX;
+        y = oldY;
+    }
+
     private void move() {
+        // 记录移动前的位置
+        oldX = x;
+        oldY = y;
         if (!moving) return;
         switch (dir) {
             case LEFT:

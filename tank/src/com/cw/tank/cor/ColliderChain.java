@@ -14,8 +14,10 @@ public class ColliderChain implements Collider {
 
     public ColliderChain() {
         // 通过配置文件自动注入
-        colliders.add(new BulletTankCollider());
-        colliders.add(new TankTankCollider());
+        add(new BulletTankCollider());
+        add(new TankTankCollider());
+        add(new BulletWallCollider());
+        add(new TankWallCollider());
     }
 
     public void add(Collider collider) {

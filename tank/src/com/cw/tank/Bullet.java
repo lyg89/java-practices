@@ -16,29 +16,27 @@ public class Bullet extends GameObject {
     private Rectangle rect = new Rectangle();
 
     private boolean living = true;
-    private GameModel gm;
 
     private Group group;
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
 
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gm.add(this);
+        GameModel.getInstance().add(this);
     }
 
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
 
@@ -89,23 +87,15 @@ public class Bullet extends GameObject {
         }
     }
 
-    public boolean collideWith(Tank tank) {
-        if (this.group == tank.getGroup()) {
-            return false;
-        }
-
-        if (rect.intersects(tank.getRect())) {
-            tank.die();
-            this.die();
-            int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-            int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.add(new Explode(eX, eY, gm));
-            return true;
-        }
-        return false;
+    public void die() {
+        this.living = false;
     }
 
-    private void die() {
-        this.living = false;
+    public Group getGroup() {
+        return this.group;
+    }
+
+    public Rectangle getRect() {
+        return rect;
     }
 }
